@@ -1,7 +1,7 @@
 """Utilities for dealing with time."""
 
-from functools import wraps
 import time
+from functools import wraps
 
 import numpy as np
 
@@ -15,7 +15,7 @@ class Stopwatch:
         self.absolute_start = time.perf_counter()
 
     def __str__(self):
-        return u"\u231a  Stopwatch for: " + self.name
+        return "\u231a  Stopwatch for: " + self.name
 
     @property
     def elapsed(self):
@@ -36,9 +36,9 @@ class Stopwatch:
     def __enter__(self):
         return self
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, *_):
         print(
-            u"{timer} Finished! \u2714\nTotal elapsed time: {total}".format(
+            "{timer} Finished! \u2714\nTotal elapsed time: {total}".format(
                 timer=self.name, total=hrtime(time.perf_counter() - self.absolute_start)
             )
         )
@@ -89,7 +89,7 @@ def hrtime(t):
 
     # microseconds
     elif t >= 1e-6:
-        timestr = u"{:g} {}s".format(t * 1e6, u"\u03BC")
+        timestr = "{:g} {}s".format(t * 1e6, "\u03BC")
 
     # nanoseconds or smaller
     else:
@@ -115,7 +115,7 @@ def profile(func):
     wrapper.serr = lambda: np.std(calls) / np.sqrt(len(calls))
     wrapper.summary = lambda: print(
         "Runtimes: {} {} {}".format(
-            hrtime(wrapper.mean()), u"\u00B1", hrtime(wrapper.serr())
+            hrtime(wrapper.mean()), "\u00B1", hrtime(wrapper.serr())
         )
     )
 
